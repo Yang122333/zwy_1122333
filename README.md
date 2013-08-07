@@ -265,8 +265,7 @@ function updatelist(err) {
         for( var pi = 0; pi < people.length; pi++ ) {
             var fun = function(id, name) {
                 var li = document.createElement('li');
-                $(li).append('<span>' + name + ' (' + id +
-                             ')</span>' + 
+                $(li).append('<span>' + name + ' (' + id + ')</span>' + 
                              '<button class="update">Update</button>' +
                              '<button class="remove">Remove</button>');
                 $(li).children('button.update').click(function() {
@@ -365,6 +364,81 @@ $(document).ready(function() {
         }
     });
 });
+```
+
+### Session Login 
+
+This example demonstrates a simple login form that can be used to authenticate users. 
+
+![Screenshot](https://github.com/asaarinen/nox.js/raw/master/doc/session.png)
+
+Server-side code:
+
+```javascript
+var domain = require('domain');
+
+exports.login = function(name, password, callback) {
+    if( domain.active.httpSession.username )
+	callback('already logged in');
+    else {
+	if( name + 'pass' == password ) {
+	    // domain.active.httpSession is just a copy, so we have to
+	    // modify the original in the session store
+	    process.stdout.write('modifying session\n');
+	    domain.active.httpSessionStore.modify(function(sess, cb) {
+		process.stdout.write('modified\n');
+		sess.username = name;
+		cb();
+	    }, callback);
+	} else
+	    callback('invalid password');
+    }
+}
+
+exports.logout = function(callback) {
+    domain.active.httpSessionStore.modify(function(sess, cb) {
+	delete sess.username;
+	cb();
+    }, callback);
+}
+
+exports.getUserName = function(callback) {
+    callback(null, domain.active.httpSession.username);
+}
+```
+
+Client-side code:
+
+```javascript
+var session = require('./session.js');
+
+function updateStatus(err) {
+    if( err )
+	alert('Error: ' + err);
+    session.getUserName(function(err, name) {
+	if( name ) {
+	    $('#status').text('Logged in as ' + name);
+	    $('#controls').empty();
+	    $('#controls').append('<button>Log out</button>');
+	    $('#controls button').click(function() {
+		session.logout(updateStatus);
+	    });
+	} else {
+	    $('#status').text('Logged out');	    
+	    $('#controls').empty();
+	    $('#controls').append(
+		'<p>Log in as:<input id="username" placeholder="Name"></p>' + 
+	        '<p>Password:<input id="password" placeholder="Password"></p>' + 
+		'<button>Log in</button>');
+	    $('#controls button').click(function() {
+		session.login($('#username').val(),
+			      $('#password').val(), updateStatus);
+	    });
+	}
+    });
+}
+
+$(document).ready(function() { updateStatus(); });
 ```
 
 ## API Reference

@@ -16,7 +16,7 @@ function updateStatus(err) {
 	    $('#controls').empty();
 	    $('#controls').append(
 		'<p>Log in as:<input id="username" placeholder="Name"></p>' + 
-	        '<p>Password:<input id="password" placeholder="Name"></p>' + 
+	        '<p>Password:<input id="password" placeholder="Password"></p>' + 
 		'<button>Log in</button>');
 	    $('#controls button').click(function() {
 		session.login($('#username').val(),
