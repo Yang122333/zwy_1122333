@@ -385,20 +385,20 @@ exports.login = function(name, password, callback) {
 	    // domain.active.httpSession is just a copy, so we have to
 	    // modify the original in the session store
 	    process.stdout.write('modifying session\n');
-	    domain.active.httpSessionStore.modify(function(sess, cb) {
-		process.stdout.write('modified\n');
-		sess.username = name;
-		cb();
-	    }, callback);
-	} else
-	    callback('invalid password');
+            domain.active.httpSessionStore.modify(function(sess, cb) {
+                process.stdout.write('modified\n');
+                sess.username = name;
+                cb();
+            }, callback);
+        } else
+            callback('invalid password');
     }
 }
 
 exports.logout = function(callback) {
     domain.active.httpSessionStore.modify(function(sess, cb) {
-	delete sess.username;
-	cb();
+        delete sess.username;
+        cb();
     }, callback);
 }
 
@@ -414,27 +414,27 @@ var session = require('./session.js');
 
 function updateStatus(err) {
     if( err )
-	alert('Error: ' + err);
+        alert('Error: ' + err);
     session.getUserName(function(err, name) {
-	if( name ) {
-	    $('#status').text('Logged in as ' + name);
-	    $('#controls').empty();
-	    $('#controls').append('<button>Log out</button>');
-	    $('#controls button').click(function() {
-		session.logout(updateStatus);
-	    });
-	} else {
-	    $('#status').text('Logged out');	    
-	    $('#controls').empty();
-	    $('#controls').append(
-		'<p>Log in as:<input id="username" placeholder="Name"></p>' + 
-	        '<p>Password:<input id="password" placeholder="Password"></p>' + 
-		'<button>Log in</button>');
-	    $('#controls button').click(function() {
-		session.login($('#username').val(),
-			      $('#password').val(), updateStatus);
-	    });
-	}
+        if( name ) {
+            $('#status').text('Logged in as ' + name);
+            $('#controls').empty();
+            $('#controls').append('<button>Log out</button>');
+            $('#controls button').click(function() {
+                session.logout(updateStatus);
+            });
+        } else {
+            $('#status').text('Logged out');            
+            $('#controls').empty();
+            $('#controls').append(
+                '<p>Log in as:<input id="username" placeholder="Name"></p>' + 
+                '<p>Password:<input id="password" placeholder="Password"></p>' + 
+                '<button>Log in</button>');
+            $('#controls button').click(function() {
+                session.login($('#username').val(),
+                              $('#password').val(), updateStatus);
+            });
+        }
     });
 }
 
@@ -518,7 +518,7 @@ In the client side code, there is a global `nox_rpc` variable that you can use t
 ```javascript
 
 nox_rpc.addListener(function(status) {
-    // status is either 'connect' or 'disconnect'		     
+    // status is either 'connect' or 'disconnect'                     
 });
 
 // or you can query the status synchronously
