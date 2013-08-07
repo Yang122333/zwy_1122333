@@ -48,7 +48,7 @@ Rather than built-in modules like `fs`, Nox apps more commonly expose a module p
 
 Nox is still in an experimental phase, but it is fun to play around with; it doesn't get in your way at all, and lets you focus on writing the actual application logic instead of learning some platform quirks. (Unlike some web MVC frameworks not mentioned here.) 
 
-Also, Nox is small; it only consists of ~500 lines of code.
+Nox is small, roughly ~500 lines of code.
 
 ## How Does It Work?
 
@@ -388,10 +388,10 @@ Returns a Nox application object with the following functions:
 
 | Function | Description |
 | --- | --- |
-| `noxapp.get(req, res)` | the function that generates `nox-client.js`, should be passed to Express like this: `express.get('/nox-client.js', noxapp.get)` |
-| `noxapp.page(url, servermods, clientmods)` | the function used to add pages to nox, see below |
-| `noxapp.socketAuth(handshakeData, callback)` | this function should be called when the websocket `authorization` event arrives, for example: `socketServer.set('authorization', noxapp.socketAuth);` |
-| `noxapp.socketConn(client_socket)` | this function should be called when a websocket connection has been created, for example: `socketServer.on('connection', noxapp.socketConn);` |
+| `noxapp.get` | the function that generates `nox-client.js`, should be passed to Express like this: `express.get('/nox-client.js', noxapp.get)` |
+| `noxapp.page` | the function used to add pages to nox, see below |
+| `noxapp.socketAuth` | this function should be called when the websocket `authorization` event arrives, for example: `socketServer.set('authorization', noxapp.socketAuth);` |
+| `noxapp.socketConn` | this function should be called when a websocket connection has been created, for example: `socketServer.on('connection', noxapp.socketConn);` |
 
 ### Adding pages to a Nox application
 
@@ -405,7 +405,13 @@ The arguments are referenced in more detail below:
 | --- | --- |
 | `url` | The server URL of the page being served. When requesting `nox-client.js`, Nox matches this url to the HTTP Referrer headers to find out which page is being requested. |
 | `server_modules` | An array listing all server-side modules that should be available in the generated `nox-client.js` file for this url. Remote function wrappers are created for all exported functions in these modules. |
-| `client_modules` | An array listing all modules that are bundled for local execution in the browser. Built-in Node.js modules cannot be included to this array. |
+| `client_modules` | An array listing all module file names that are bundled for local execution in the browser. Built-in Node.js modules cannot be included to this array. |
+
+Note: if you want to be able  to `require()` 3rd-party JavaScript code, you can just include the necessary `<script>` tags in the HTML before `/nox-client.js`, and refer to them in the `client_modules` array by name. For example, you could include
+
+`<script src="/js/async.js"></script>` 
+
+to your HTML, and add `'async'` to your `client_modules` array; after that you can say `var async = require('async');` in the client code.
 
 ### Domains and Sessions
 
@@ -450,14 +456,6 @@ var connected = nox_rpc.isConnected();
 ## Browser Support
 
 Nox should work in all browsers where Socket.IO works (see <a href="http://socket.io/#browser-support">here</a>). However it has not been tested extensively in all browsers yet.
-
-## Known Issues
-
-There are a couple known issues with Nox:
-
-- for each callback function passed over the websocket connection, an entry in a callbacks table is added. These callbacks are session specific, but are not cleared when the connection terminates, leaking memory over time (easily fixed by dropping the session from the table at websocket disconnect)
-
-- connectivity errors - it may be nontrivial to know in the client whether the websocket connection has dropped or not, as callbacks are just never returned. A connect/disconnect event should be emitted according to the websocket connection status to handle this
 
 ## License
 
