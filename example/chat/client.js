@@ -20,10 +20,12 @@ $(document).ready(function() {
     });
 
     username = prompt('User name:');
-    var password = prompt('Password (make up one if you are logging in for the first time):');
+    var password = prompt('Password (make up one if you are logging ' + 
+			  'in for the first time):');
     chat.login(username, password, receiveChat, function(err) {
 	if( err )
-	    alert('Invalid username or password. Please refresh the page to try againlogin again.');
+	    alert('Invalid username or password. Please refresh the ' + 
+		  'page to try againlogin again.');
 	else
 	    $('h1').text('Nox Chat - Logged in as ' + username);
     });
