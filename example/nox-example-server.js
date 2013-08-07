@@ -26,7 +26,7 @@ var socketServer = require('socket.io').listen(httpServer);
 socketServer.set('authorization', noxapp.socketAuth);
 socketServer.on('connection', noxapp.socketConn);
 
-var examples = [ 'nssh', 'crud', 'img', 'session' ];
+var examples = [ 'nssh', 'crud', 'img', 'session', 'chat' ];
 
 for( var ei = 0; ei < examples.length; ei++ )
     noxapp.page('/' + examples[ei] + '/client.html',

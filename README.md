@@ -430,6 +430,81 @@ function updateStatus(err) {
 $(document).ready(function() { updateStatus(); });
 ```
 
+### Chat server
+
+Chat server example is a trivial chat server that broadcasts all messages to every other participant.
+
+![Screenshot](https://github.com/asaarinen/nox.js/raw/master/doc/chat.png)
+
+Server-side code:
+
+```javascript
+var domain = require('domain');
+
+var users = {};
+var activeusers = {};
+
+exports.send = function(message) {
+    if( !domain.active.socketSession.username )
+        return;
+    for( var ai in activeusers )
+        activeusers[ai](domain.active.socketSession.username, message);
+}
+
+exports.login = function(name, password, recvfun, callback) {
+    if( users[name] == null )
+        users[name] = password;
+
+    if( users[name] == password && password ) {
+        domain.active.socketSession.username = name;
+        var sessionid = (Math.random() + '').substring(2);
+        activeusers[sessionid] = recvfun;
+        domain.active.socket.on('disconnect', function() {
+            delete activeusers[sessionid];
+        });
+        callback();
+    }  else
+        callback('error logging in');
+}
+```
+
+Client-side code:
+
+```javascript
+var chat = require('./chat.js');
+var async = require('async');
+
+var username = null;
+
+function receiveChat(username, message) {
+    $('table').append('<tr><td>' + username + ':</td><td>' + message + '</td>');
+}
+
+function sendChat() {
+    var msg = $('input').val();
+    $('input').val('');
+    chat.send(msg);
+}
+
+$(document).ready(function() {
+    $('input').keypress(function(event) {
+        if( event.keyCode == 13 )
+            sendChat();
+    });
+
+    username = prompt('User name:');
+    var password = prompt('Password (make up one if you are logging ' + 
+                          'in for the first time):');
+    chat.login(username, password, receiveChat, function(err) {
+        if( err )
+            alert('Invalid username or password. Please refresh the ' + 
+                  'page to try againlogin again.');
+        else
+            $('h1').text('Nox Chat - Logged in as ' + username);
+    });
+});
+```
+
 ## API Reference
 
 ### Prerequisites
