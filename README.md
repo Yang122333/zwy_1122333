@@ -61,8 +61,6 @@ This means that
   - add a listener to detect socket connectivity events 
   - use modules like <a href="https://github.com/creationix/safereturn">safereturn</a> to give your callback a timeout
 
-In practice, these limitations are not really restrictive for web app development.
-
 ### Security & Authentication
 
 The JavaScript modules available to each web page are defined on the server side. While also native Node.js modules can be exposed, typically it is an application-specific module that exports the kind of API that the web app would need. 
@@ -97,7 +95,7 @@ A more complete out-of-the-box capability of running tests would include either 
 
 ## Getting Started
 
-This guide details to you how to get up and running with Nox. This guide assumes using Express and Socket.IO; while Nox does not actually depend on them, it has this far only been tested with them.
+This guide details to you how to get up and running with Nox.
 
 ### Server side       
 
@@ -141,7 +139,7 @@ noxapp.page('/async/client.html', // when serving page /async/client.html
 
 Nox actually uses the HTTP Referrer header to deduce which page Nox is being requested for.
 
-A complete example server using Nox with Express and Socket.IO can be found in the examples directory.
+A complete example server using Nox can be found in the examples directory.
 
 ### Client side
 
@@ -434,6 +432,10 @@ $(document).ready(function() { updateStatus(); });
 
 ## API Reference
 
+### Prerequisites
+
+Nox has been developed to work together with Express and Socket.IO. Alternative HTTP / websocket libraries could be used with minor modifications to the `get`, `socketAuth` and `socketConn` functions to match those of the alternative platform.
+
 ### Creating a Nox application
 
 The entry point to Nox is `nox()` function exported by requiring `nox`:
@@ -481,6 +483,10 @@ to your HTML, and add `'async'` to your `client_modules` array; after that you c
 ### Domains and Sessions
 
 When any remote function is being called, the current HTTP session is bound to the active domain before making the call. In fact, the currently active domain has the following additional properties:
+
+`domain.active.socket`
+
+The actual Socket.IO connected socket. If your app maintains an array of active sessions in order to broadcast callbacks to all of them, for example in a chat application, it is practical to listen for the `disconnect` event in order to drop disconnected clients.
 
 `domain.active.socketSession = {}`
 
