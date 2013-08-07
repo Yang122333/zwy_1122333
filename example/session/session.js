@@ -7,9 +7,7 @@ exports.login = function(name, password, callback) {
 	if( name + 'pass' == password ) {
 	    // domain.active.httpSession is just a copy, so we have to
 	    // modify the original in the session store
-	    process.stdout.write('modifying session\n');
 	    domain.active.httpSessionStore.modify(function(sess, cb) {
-		process.stdout.write('modified\n');
 		sess.username = name;
 		cb();
 	    }, callback);
