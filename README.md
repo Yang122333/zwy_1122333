@@ -379,12 +379,12 @@ var domain = require('domain');
 
 exports.login = function(name, password, callback) {
     if( domain.active.httpSession.username )
-	callback('already logged in');
+        callback('already logged in');
     else {
-	if( name + 'pass' == password ) {
-	    // domain.active.httpSession is just a copy, so we have to
-	    // modify the original in the session store
-	    process.stdout.write('modifying session\n');
+        if( name + 'pass' == password ) {
+            // domain.active.httpSession is just a copy, so we have to
+            // modify the original in the session store
+            process.stdout.write('modifying session\n');
             domain.active.httpSessionStore.modify(function(sess, cb) {
                 process.stdout.write('modified\n');
                 sess.username = name;
