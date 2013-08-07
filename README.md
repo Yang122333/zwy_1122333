@@ -163,7 +163,7 @@ And that's it! Typically there is a JavaScript module for each page that actuall
 
 ## Examples
 
-These examples can be run in the `example/` directory by saying `node nox-example-server.js` and going to `localhost:8080/nssh/client.html` or similar for each example.
+These examples can be run in the `example/` directory by saying `node nox-example-server.js` and going to `localhost:8080/nssh/client.html` or similar for each example. Make sure you are in that directory when starting `node` in order for the module file paths to match.
 
 ### Non-Secure Shell
 
