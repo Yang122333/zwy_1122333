@@ -9,7 +9,7 @@ Nox.js - write Node.js web apps faster
 
 Nox enables you to fluently mix browser-side JavaScript and server-side Node.js code like this:
 
-```
+```javascript
 var fs = require('fs');
 var async = require('async');
 
@@ -20,21 +20,14 @@ $(document).ready(function() {
         },
         function(files, wfcb) {
             async.eachSeries(files, function(filename, filecb) {
-                async.waterfall([
-                    function(wfcb2) {
-                        fs.stat(filename, function(err, stats) {
-                            if( err ) 
-                                stats = { size: 'n/a' }
-                            wfcb2(null, stats);
-                        });
-                    },
-                    function(stats, wfcb2) {
-                        var li = document.createElement('li');
-                        $(li).text(filename + ' ' + stats.size);
-                        $('ul').append(li);
-                        wfcb2();
-                    }
-                ], filecb);
+                fs.stat(filename, function(err, stats) {
+                    if( err ) 
+                        stats = { size: 'n/a' }
+                    var li = document.createElement('li');
+                    $(li).text(filename + ' ' + stats.size);
+                    $('ul').append(li);
+                    filecb();
+                });
             }, wfcb);
         }
     ], function(err) {
@@ -46,7 +39,7 @@ $(document).ready(function() {
 
 Rather than built-in modules like `fs`, Nox apps more commonly expose a module providing application-specific functionality to the web page. This eliminates the need to build a REST API into the back-end, and make ajax requests from the front-end to use that API.
 
-Nox is still in an experimental phase, but it is fun to play around with; it doesn't get in your way at all, and lets you focus on writing the actual application logic instead of learning some platform quirks. (Unlike some web MVC frameworks not mentioned here.) 
+Nox is still in an experimental phase, but it is fun to play around with; it doesn't get in your way at all, and lets you focus on writing the actual application logic instead of learning platform quirks. (Unlike some web MVC frameworks not mentioned here.) 
 
 Nox is small, roughly ~500 lines of code.
 
