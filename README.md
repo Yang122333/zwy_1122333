@@ -36,7 +36,6 @@ $(document).ready(function() {
     });
 });
 ```
-<small>(do not try exposing `fs` to web apps at home)</small>
 
 Nox is an experiment to boost developer producitivy by
 
@@ -88,8 +87,6 @@ function getUserName(callback) {
 If you need to access the session information in some other modules, you will need to either pass session information around in function arguments, or make sure that the domain is bound to all subsequent events and callbacks when executing the remote function call.
 
 Nox relies on browser websocket implementations to secure the contents of the function calls. Each generated nox-client.js bundle includes a unique identifier that is used, together with the cookie, to identify the caller. 
-
-As of this writing, __Nox has not been reviewed thoroughly for security and there may be obvious holes__ in its security, so do not use it in production until further studies have been made.
 
 ### Unit Testing
 
