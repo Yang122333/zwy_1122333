@@ -37,11 +37,9 @@ $(document).ready(function() {
 });
 ```
 
-## Some Ideology
-
 Nox is an experiment to boost developer producitivy by
 
-* having __minimal learning curve__, just get coding without having to spend time studying Nox itself
+* having __minimal learning curve__, just get coding without having to spend time studying Nox itself.
 * maximizing __code reuse__ by using the exact same codebase in client and server
 * allowing a __JavaScript API__ to be used in the browser, instead of building a REST API and making Ajax calls
 * keeping the codebase __unit testable__ in the back end, including the browser parts (a work in progress)
