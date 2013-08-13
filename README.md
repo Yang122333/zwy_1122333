@@ -36,6 +36,7 @@ $(document).ready(function() {
     });
 });
 ```
+<small>(do not try exposing `fs` to web apps at home)</small>
 
 Nox is an experiment to boost developer producitivy by
 
