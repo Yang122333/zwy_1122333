@@ -4,9 +4,6 @@
   "private": true,
   "description": "nox - fuse node.js server and browser JavaScript together",
   "main": "lib/nox-server.js",
-  "scripts": {
-    "test": "cd test && node nox-test-server.js && exit 1"
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/asaarinen/nox.js.git"
