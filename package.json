@@ -1,14 +1,14 @@
 {
   "name": "nox",
-  "version": "0.0.1",
-  "private": true,
-  "description": "nox - fuse node.js server and browser JavaScript together",
+  "version": "0.1",
+  "description": "Nox - write Node.js web apps faster",
   "main": "lib/nox-server.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/asaarinen/nox.js.git"
   },
-  "author": "Antti Saarinen",
+  "author": "Antti Saarinen <antti.p.saarinen@gmail.com>",
+  "keywords": [ "browser", "require", "commonjs", "commonjs-esque", "rpc", "server", "javascript", "api", "bundle", "callbacks" ],
   "license": "MIT",
   "readmeFilename": "README.md",
   "dependencies": {
