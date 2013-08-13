@@ -1,6 +1,6 @@
 {
   "name": "nox",
-  "version": "v0.1",
+  "version": "0.1.0",
   "description": "Nox - write Node.js web apps faster",
   "main": "lib/nox-server.js",
   "repository": {
