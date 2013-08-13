@@ -37,11 +37,16 @@ $(document).ready(function() {
 });
 ```
 
-Rather than built-in modules like `fs`, Nox apps more commonly expose a module providing application-specific functionality to the web page. This eliminates the need to build a REST API into the back-end, and make ajax requests from the front-end to use that API.
+## Some Ideology
+
+Nox is an experiment to boost developer producitivy by
+
+* having __minimal learning curve__, just get coding without having to spend time studying Nox itself
+* maximizing __code reuse__ by using the exact same codebase in client and server
+* allowing a __JavaScript API__ to be used in the browser, instead of building a REST API and making Ajax calls
+* keeping the codebase __unit testable__ in the back end, including the browser parts (a work in progress)
 
 Nox is still in an experimental phase, but it is fun to play around with; it doesn't get in your way at all, and lets you focus on writing the actual application logic instead of learning platform quirks. (Unlike some web MVC frameworks not mentioned here.) 
-
-Nox is small, roughly ~500 lines of code.
 
 ## How Does It Work?
 
