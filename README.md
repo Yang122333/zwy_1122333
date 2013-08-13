@@ -37,7 +37,7 @@ $(document).ready(function() {
 });
 ```
 
-Nox is an experiment to boost developer producitivy by
+Nox is an __experiment to boost developer producitivy__ by
 
 * having __minimal learning curve__, just get coding without having to spend time studying Nox itself.
 * maximizing __code reuse__ by using the exact same codebase in client and server
