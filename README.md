@@ -96,7 +96,7 @@ A more complete out-of-the-box capability of running tests would include either 
 
 ## Getting Started
 
-This guide details to you how to get up and running with Nox.
+This guide describes how to get up and running with Nox.
 
 ### Server side       
 
@@ -159,7 +159,7 @@ These examples can be run in the `example/` directory by saying `node nox-exampl
 
 ### Non-Secure Shell
 
-Probably the most insecure shell ever written, this example opens a local shell on your server and lets you do anything:
+Probably the most insecure shell ever written, this example opens a local shell on your server and lets you do anything (requires node v0.10+ for its use of streams)
 
 ![Screenshot](https://github.com/asaarinen/nox.js/raw/master/doc/nssh.png)
 
