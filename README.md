@@ -1,4 +1,4 @@
-Nox.js - write Node.js web apps faster
+Nox.js - write Node.js web apps easier
 ===
 
 * <a href="#how-does-it-work">How Does It Work?</a>
