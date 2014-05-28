@@ -4,7 +4,7 @@ var fs = require('fs');
 var childp = require('child_process');
 
 exports.getThumbnail = function(imgurl, thumbsize, callback) {
-    var ext = imgurl.match(/(\.[^\.]+)\?.+$/);
+    var ext = imgurl.match(/(\.[^\.\/]+)\?.+$/);
     if( ext )
 	ext = ext[1];
     if( !ext )
