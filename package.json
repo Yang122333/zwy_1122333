@@ -8,12 +8,23 @@
     "url": "https://github.com/asaarinen/nox.js.git"
   },
   "author": "Antti Saarinen <antti.p.saarinen@gmail.com>",
-  "keywords": [ "browser", "require", "commonjs", "commonjs-esque", "rpc", "server", "javascript", "api", "bundle", "callbacks" ],
+  "keywords": [
+    "browser",
+    "require",
+    "commonjs",
+    "commonjs-esque",
+    "rpc",
+    "server",
+    "javascript",
+    "api",
+    "bundle",
+    "callbacks"
+  ],
   "license": "MIT",
   "readmeFilename": "README.md",
   "dependencies": {
     "async": "~0.2.9",
-    "socket.io": "~0.9.16",
+    "socket.io": "~1.0.4",
     "uglify-js": "~2.3.6"
   },
   "devDependencies": {
